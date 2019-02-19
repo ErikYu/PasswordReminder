@@ -26,7 +26,6 @@ class _MyAppState extends State<MyApp> {
 
   checkData() async {
     await FileHelper().initFile();
-//    print(res);
   }
 
   @override

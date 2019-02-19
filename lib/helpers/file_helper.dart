@@ -8,7 +8,6 @@ class FileHelper {
   Future<String> getFile() async {
     Directory appDir = await getApplicationDocumentsDirectory();
     String appDirPath = appDir.path;
-    print(appDirPath);
     return appDirPath;
   }
 
@@ -17,7 +16,6 @@ class FileHelper {
   }
 
   checkIfFileExist() async {
-    print('asdasdakjshdjahsdjasda');
     try {
       final File file = await localFile(await getFile());
       String str = await file.readAsString();
@@ -45,5 +43,10 @@ class FileHelper {
   saveFile(lst) async {
     final File file = await localFile(await getFile());
     file.writeAsStringSync(jsonEncode(lst));
+  }
+
+  resetFile() async {
+    File file = await localFile(await getFile());
+    file.writeAsStringSync('[]');
   }
 }

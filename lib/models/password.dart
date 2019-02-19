@@ -37,8 +37,11 @@ class PasswordItem {
   }
 
   String decrypt() {
-    var password = latin1.decode(base64.decode(encrypted));
-    return password.substring(4);
+    if (encrypted != null) {
+      var password = latin1.decode(base64.decode(encrypted));
+      return password.substring(4);
+    }
+    return null;
   }
 
   static String createSalt () {

@@ -8,18 +8,13 @@ class PasswordDetailService {
         salt: PasswordItem.createSalt()
       );
     }
-    return PasswordItem.fromJson({
-      'id': 1,
-      'title': 'baidu',
-      'salt': 'juhn',
-      'userName': 'yuyizhao',
-      'encrypted': 'anVoblBhc3N3b3JkMTIz'
-    });
+    List res = await FileHelper().readFile();
+    return PasswordItem.fromJson(res.firstWhere((i) => i['id'] == id));
   }
 
   addPassword(String title, String salt, String userName, String encrypted) async {
     List res = await FileHelper().readFile();
-    int nextId = res.length > 0 ? res[res.length - 1]['id'] : 1;
+    int nextId = res.length > 0 ? res[res.length - 1]['id'] + 1 : 1;
     res.add(PasswordItem(
       id: nextId,
       title: title,

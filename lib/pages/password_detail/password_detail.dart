@@ -44,6 +44,7 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             enabled: false,
           ),
           TextField(
+            controller: TextEditingController(text: _passwordItem?.title),
             decoration: InputDecoration(
               labelText: 'Position'
             ),
@@ -52,6 +53,7 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             },
           ),
           TextField(
+            controller: TextEditingController(text: _passwordItem?.userName),
             decoration: InputDecoration(
               labelText: 'User Name'
             ),
@@ -60,6 +62,7 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             },
           ),
           TextField(
+            controller: TextEditingController(text: _passwordItem?.decrypt()),
             decoration: InputDecoration(
               labelText: 'Password',
             ),
