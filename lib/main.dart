@@ -3,6 +3,7 @@ import 'pages/password_list/password_list.dart';
 import 'package:fluro/fluro.dart';
 import 'fluro_router.dart';
 import 'helpers/file_helper.dart';
+import 'pages/test_widget/demo_dismissible.dart';
 
 void main() {
   final router = new Router();

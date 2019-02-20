@@ -71,8 +71,23 @@ class _PasswordListPageState extends State<PasswordListPage> {
                 } else if (i > passwords.length) {
                   return null;
                 }
-                return PasswordCard(
-                  passwordItem: passwords[i],
+                return Dismissible(
+                  key: Key(passwords[i].id.toString()),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    padding: EdgeInsets.only(right: 24),
+                    alignment: AlignmentDirectional.centerEnd,
+                    color: Colors.red,
+                    child: Text('Delete', style: TextStyle(color: Colors.white, fontSize: 24)),
+                  ),
+                  child: PasswordCard(
+                    passwordItem: passwords[i],
+                  ),
+                  onDismissed: (DismissDirection direction) {
+                    setState(() {
+                      passwords.removeAt(i);
+                    });
+                  },
                 );
               }
           ),

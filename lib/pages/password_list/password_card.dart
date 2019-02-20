@@ -3,7 +3,7 @@ import 'package:password_reminder/models/password.dart';
 import 'package:password_reminder/fluro_router.dart';
 
 class PasswordCard extends StatefulWidget {
-  static String defaultPass = '●●●●●●●●●●●●';
+  static String defaultPass = '•••••••••';
   final PasswordItem passwordItem;
   PasswordCard({this.passwordItem});
   @override
@@ -31,6 +31,8 @@ class _PasswordCardState extends State<PasswordCard> {
         RootRoutes.router.navigateTo(context, '/password/${widget.passwordItem.id}');
       },
       child: Card(
+        margin: EdgeInsets.only(left: 0, right: 0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0.0))),
         color: colors[colorIndex],
         elevation: 0,
         child: Container(
