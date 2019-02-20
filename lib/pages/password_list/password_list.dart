@@ -25,8 +25,12 @@ class _PasswordListPageState extends State<PasswordListPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          RootRoutes.router.navigateTo(context, '/password/0',);
+        onPressed: () async {
+          await RootRoutes.router.navigateTo(context, '/password/0',);
+          setState(() {
+            page = 1;
+            passwords = [];
+          });
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

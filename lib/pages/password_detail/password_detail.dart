@@ -51,6 +51,11 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             onChanged: (String val) {
               title = val;
             },
+            onSubmitted: (String val) {
+              setState(() {
+                _passwordItem.title = val;
+              });
+            },
           ),
           TextField(
             controller: TextEditingController(text: _passwordItem?.userName),
@@ -60,6 +65,11 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             onChanged: (String val) {
               userName = val;
             },
+            onSubmitted: (String val) {
+              setState(() {
+                _passwordItem.userName = val;
+              });
+            },
           ),
           TextField(
             controller: TextEditingController(text: _passwordItem?.decrypt()),
@@ -68,6 +78,11 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
             ),
             onChanged: (String val) {
               password = val;
+            },
+            onSubmitted: (String val) {
+              setState(() {
+                _passwordItem.encrypted = _passwordItem.encrypt(val);
+              });
             },
           ),
           ButtonBar(
