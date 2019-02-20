@@ -27,13 +27,12 @@ class _PasswordListPageState extends State<PasswordListPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await RootRoutes.router.navigateTo(context, '/password/0',);
-          print('backing~~~~~~~~~~~~~');
           setState(() {
             page = 1;
             passwords = [];
           });
         },
-        tooltip: 'Increment',
+        tooltip: 'Create',
         child: Icon(Icons.add),
         elevation: 2.0,
       ),
