@@ -6,6 +6,7 @@ import 'helpers/file_helper.dart';
 import 'pages/test_widget/demo_dismissible.dart';
 import 'pages/test_widget/demo_inkwell.dart';
 import 'pages/index_lock/index_lock.dart';
+import 'pages/setting/setting.dart';
 
 void main() {
   final router = new Router();
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         // is not restarted.
         primarySwatch: Colors.deepPurple,
       ),
-      home: IndexLockPage(),
+      home: SettingPage(),
     );
   }
 }

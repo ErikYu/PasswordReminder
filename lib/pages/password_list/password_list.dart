@@ -36,16 +36,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
         child: Icon(Icons.add),
         elevation: 2.0,
       ),
-      bottomNavigationBar: FABBottomAppBar(
-        notchedShape: CircularNotchedRectangle(),
-        onTabSelected: (int i) {
-          print(i);
-        },
-        items: [
-          FABBottomAppBarItem(iconData: Icons.vpn_key, text: 'keys'),
-          FABBottomAppBarItem(iconData: Icons.settings, text: 'setting'),
-        ],
-      ),
+      bottomNavigationBar: MyBottomAppBar(currentIndex: 0),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
