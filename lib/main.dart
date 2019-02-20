@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 import 'fluro_router.dart';
 import 'helpers/file_helper.dart';
 import 'pages/test_widget/demo_dismissible.dart';
+import 'pages/test_widget/demo_inkwell.dart';
 
 void main() {
   final router = new Router();

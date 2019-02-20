@@ -26,47 +26,42 @@ class _PasswordCardState extends State<PasswordCard> {
     int colorIndex = (widget.passwordItem.id - 1) % colors.length;
     TextStyle titleStyle = TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
     TextStyle textStyle = TextStyle(color: Colors.white);
-    return GestureDetector(
-      onLongPress: () {
-        RootRoutes.router.navigateTo(context, '/password/${widget.passwordItem.id}');
-      },
-      child: Card(
-        margin: EdgeInsets.only(left: 0, right: 0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0.0))),
-        color: colors[colorIndex],
-        elevation: 0,
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Flex(
-            direction: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('${widget.passwordItem.title}', style: titleStyle),
-                  Text('  username: ${widget.passwordItem.userName}', style: textStyle),
-                  Text('  password: ${showDecrypted ? decrypted : PasswordCard.defaultPass}', style: textStyle),
-                ],
-              ),
-              IconButton(
-                icon: showDecrypted ? Icon(Icons.lock, color: Colors.white) : Icon(Icons.remove_red_eye, color: Colors.white),
-                onPressed: () {
-                  setState(() {
-                    if (showDecrypted) {
-                      showDecrypted = false;
-                      // 关闭
-                    } else {
-                      showDecrypted = true;
-                      // 解密
-                      decrypted = widget.passwordItem.decrypt();
-                    }
-                  });
-                },
-              )
-            ],
-          )
-        ),
+    return Card(
+      margin: EdgeInsets.only(left: 0, right: 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0.0))),
+      color: colors[colorIndex],
+      elevation: 0,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('${widget.passwordItem.title}', style: titleStyle),
+                Text('  username: ${widget.passwordItem.userName}', style: textStyle),
+                Text('  password: ${showDecrypted ? decrypted : PasswordCard.defaultPass}', style: textStyle),
+              ],
+            ),
+            IconButton(
+              icon: showDecrypted ? Icon(Icons.lock, color: Colors.white) : Icon(Icons.remove_red_eye, color: Colors.white),
+              onPressed: () {
+                setState(() {
+                  if (showDecrypted) {
+                    showDecrypted = false;
+                    // 关闭
+                  } else {
+                    showDecrypted = true;
+                    // 解密
+                    decrypted = widget.passwordItem.decrypt();
+                  }
+                });
+              },
+            )
+          ],
+        )
       ),
     );
   }

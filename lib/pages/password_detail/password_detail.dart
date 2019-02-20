@@ -90,8 +90,13 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
               RaisedButton(
                 child: Text('Save'),
                 onPressed: () async {
-                  var res = _passwordItem.encrypt(password);
-                  await PasswordDetailService().addPassword(title, _passwordItem.salt, userName, res);
+                  print(_passwordItem.toMap());
+                  if (_passwordItem.id == 0) {
+                    var res = _passwordItem.encrypt(password);
+                    await PasswordDetailService().addPassword(title, _passwordItem.salt, userName, res);
+                  } else {
+                    await PasswordDetailService().savePassword(_passwordItem.id, _passwordItem.toMap());
+                  }
                 },
               ),
               RaisedButton(

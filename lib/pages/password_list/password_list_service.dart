@@ -7,4 +7,10 @@ class PasswordListService {
     List res = await FileHelper().readFile();
     return res.skip(limit * page - limit).take(limit).map<PasswordItem>((i) => PasswordItem.fromJson(i)).toList();
   }
+
+  deleteChosenPassword(int id) async {
+    List res = await FileHelper().readFile();
+    res.removeWhere((i) => i['id'] == id);
+    await FileHelper().saveFile(res);
+  }
 }

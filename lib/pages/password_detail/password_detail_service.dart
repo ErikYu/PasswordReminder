@@ -5,6 +5,7 @@ class PasswordDetailService {
   getPasswordDetail(int id) async {
     if (id == 0) {
       return PasswordItem(
+        id: 0,
         salt: PasswordItem.createSalt()
       );
     }
@@ -22,6 +23,13 @@ class PasswordDetailService {
       userName: userName,
       encrypted: encrypted
     ).toMap());
+    await FileHelper().saveFile(res);
+  }
+
+  savePassword(int id, Map newData) async {
+    List res = await FileHelper().readFile();
+    var thisOne = res.firstWhere((i) => i['id'] == id);
+    res[res.indexOf(thisOne)] = newData;
     await FileHelper().saveFile(res);
   }
 }

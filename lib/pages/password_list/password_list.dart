@@ -27,6 +27,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await RootRoutes.router.navigateTo(context, '/password/0',);
+          print('backing~~~~~~~~~~~~~');
           setState(() {
             page = 1;
             passwords = [];
@@ -80,11 +81,21 @@ class _PasswordListPageState extends State<PasswordListPage> {
                     color: Colors.red,
                     child: Text('Delete', style: TextStyle(color: Colors.white, fontSize: 24)),
                   ),
-                  child: PasswordCard(
-                    passwordItem: passwords[i],
+                  child: GestureDetector(
+                    onLongPress: () async {
+                      await RootRoutes.router.navigateTo(context, '/password/${passwords[i].id}');
+                      setState(() {
+                        page = 1;
+                        passwords = [];
+                      });
+                    },
+                    child: PasswordCard(
+                      passwordItem: passwords[i],
+                    ),
                   ),
                   onDismissed: (DismissDirection direction) {
                     setState(() {
+                      PasswordListService().deleteChosenPassword(passwords[i].id);
                       passwords.removeAt(i);
                     });
                   },
