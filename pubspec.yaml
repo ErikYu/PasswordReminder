@@ -18,6 +18,7 @@ dependencies:
   path_provider: 0.4.1
   fluro: ^1.4.0
   crypto: ^2.0.6
+  rxdart: ^0.20.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

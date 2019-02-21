@@ -4,6 +4,7 @@ import 'package:password_reminder/models/password.dart';
 import './password_card.dart';
 import '../layout/bottom_app_bar.dart';
 import 'package:password_reminder/fluro_router.dart';
+import 'package:password_reminder/store/main_store.dart';
 
 class PasswordListPage extends StatefulWidget {
   _PasswordListPageState createState() => _PasswordListPageState();
@@ -13,9 +14,22 @@ class _PasswordListPageState extends State<PasswordListPage> {
   int page = 1;
   List<PasswordItem> passwords = [];
 
+  var $locked;
+
   @override
   initState(){
     super.initState();
+    $locked = MainStore().locked.stream.listen((bool locked) {
+      if (locked) {
+        RootRoutes.router.navigateTo(context, '/', replace: true);
+      }
+    });
+  }
+
+  @override
+  dispose() {
+    $locked.cancel();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {

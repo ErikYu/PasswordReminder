@@ -7,6 +7,8 @@ import 'pages/index_lock/index_lock.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
+import 'store/main_store.dart';
+
 void main() {
   final router = new Router();
   RootRoutes.configureRoutes(router);
@@ -18,13 +20,20 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   // This widget is the root of your application.
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     checkData();
+  }
+
+  @override
+  dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   checkData() async {
@@ -33,9 +42,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive) {
+      // 后台运行
+      MainStore().locked.add(true);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Password Reminder',
+      title: 'Locker',
       theme: ThemeData(
         // This is the theme of your application.
         //
