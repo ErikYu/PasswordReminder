@@ -3,8 +3,14 @@ import 'dart:io';
 import 'dart:core';
 import 'dart:convert';
 
+abstract class MyFiles {
+  static final String pwd = 'pwds.json';
+  static final String locker = 'locker.json';
+}
+
 class FileHelper {
-  static final String _name = 'pwds.json';
+  FileHelper(this.name);
+  final String name;
   Future<String> getFile() async {
     Directory appDir = await getApplicationDocumentsDirectory();
     String appDirPath = appDir.path;
@@ -12,7 +18,7 @@ class FileHelper {
   }
 
   localFile(path) async {
-    return File('$path/$_name');
+    return File('$path/$name');
   }
 
   checkIfFileExist() async {
@@ -25,19 +31,26 @@ class FileHelper {
     }
   }
 
-  initFile() async {
+  initFile({String seedContent}) async {
     var fileExist = await checkIfFileExist();
     if (!fileExist) {
       File file = await localFile(await getFile());
       await file.create();
-      file.writeAsStringSync('[]');
+      if (seedContent != null) {
+        file.writeAsStringSync(seedContent);
+      }
     }
   }
 
-  readFile() async {
+  readFileAsJson() async {
     final File file = await localFile(await getFile());
     String str = await file.readAsString();
     return jsonDecode(str);
+  }
+
+  readFileAsString() async {
+    final File file = await localFile(await getFile());
+    return await file.readAsString();
   }
 
   saveFile(lst) async {

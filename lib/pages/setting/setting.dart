@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../layout/bottom_app_bar.dart';
+import 'package:password_reminder/fluro_router.dart';
 
 class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class SettingPage extends StatelessWidget {
             title: Text('修改密码'),
             onTap: () {
               print('go change password');
+              RootRoutes.router.navigateTo(context, '/setting/lockreset');
             },
           ),
           ListTile(

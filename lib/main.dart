@@ -29,7 +29,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   checkData() async {
-    await FileHelper().initFile();
+    await FileHelper(MyFiles.pwd).initFile(seedContent: '[]');
+    await FileHelper(MyFiles.locker).initFile();
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:password_reminder/helpers/file_helper.dart';
 
 void main() {
   test('file helper', () {
-    FileHelper().checkIfFileExist();
+    FileHelper(MyFiles.pwd).checkIfFileExist();
   });
 }
 

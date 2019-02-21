@@ -9,12 +9,12 @@ class PasswordDetailService {
         salt: PasswordItem.createSalt()
       );
     }
-    List res = await FileHelper().readFile();
+    List res = await FileHelper(MyFiles.pwd).readFileAsJson();
     return PasswordItem.fromJson(res.firstWhere((i) => i['id'] == id));
   }
 
   addPassword(String title, String salt, String userName, String encrypted) async {
-    List res = await FileHelper().readFile();
+    List res = await FileHelper(MyFiles.pwd).readFileAsJson();
     int nextId = res.length > 0 ? res[res.length - 1]['id'] + 1 : 1;
     res.add(PasswordItem(
       id: nextId,
@@ -23,13 +23,13 @@ class PasswordDetailService {
       userName: userName,
       encrypted: encrypted
     ).toMap());
-    await FileHelper().saveFile(res);
+    await FileHelper(MyFiles.pwd).saveFile(res);
   }
 
   savePassword(int id, Map newData) async {
-    List res = await FileHelper().readFile();
+    List res = await FileHelper(MyFiles.pwd).readFileAsJson();
     var thisOne = res.firstWhere((i) => i['id'] == id);
     res[res.indexOf(thisOne)] = newData;
-    await FileHelper().saveFile(res);
+    await FileHelper(MyFiles.pwd).saveFile(res);
   }
 }
