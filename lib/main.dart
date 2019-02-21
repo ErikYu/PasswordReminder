@@ -4,6 +4,8 @@ import 'fluro_router.dart';
 import 'helpers/file_helper.dart';
 import 'pages/index_lock/index_lock.dart';
 //import 'pages/setting/setting.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 void main() {
   final router = new Router();
@@ -27,7 +29,7 @@ class _MyAppState extends State<MyApp> {
 
   checkData() async {
     await FileHelper(MyFiles.pwd).initFile(seedContent: '[]');
-    await FileHelper(MyFiles.locker).initFile(seedContent: '1234');
+    await FileHelper(MyFiles.locker).initFile(seedContent: sha256.convert(utf8.encode('1234')).toString());
   }
 
   @override
