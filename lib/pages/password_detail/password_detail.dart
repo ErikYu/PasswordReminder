@@ -16,6 +16,11 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
   String userName;
   String title;
 
+  TextEditingController _saltController = TextEditingController();
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _decryptedController = TextEditingController();
+
   @override
   initState() {
     super.initState();
@@ -26,6 +31,10 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
     var res = await PasswordDetailService().getPasswordDetail(int.parse(widget.id));
     setState(() {
       _passwordItem = res;
+      _saltController.text = _passwordItem.salt;
+      _titleController.text = _passwordItem.title;
+      _usernameController.text = _passwordItem.userName;
+      _decryptedController.text = _passwordItem.decrypt();
     });
   }
 
@@ -34,81 +43,71 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
       appBar: AppBar(
         title: Text('Detail'),
       ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Salt'
-            ),
-            controller: TextEditingController(text: _passwordItem?.salt),
-            enabled: false,
-          ),
-          TextField(
-            controller: TextEditingController(text: _passwordItem?.title),
-            decoration: InputDecoration(
-              labelText: 'Position'
-            ),
-            onChanged: (String val) {
-              title = val;
-            },
-            onSubmitted: (String val) {
-              setState(() {
-                _passwordItem.title = val;
-              });
-            },
-          ),
-          TextField(
-            controller: TextEditingController(text: _passwordItem?.userName),
-            decoration: InputDecoration(
-              labelText: 'User Name'
-            ),
-            onChanged: (String val) {
-              userName = val;
-            },
-            onSubmitted: (String val) {
-              setState(() {
-                _passwordItem.userName = val;
-              });
-            },
-          ),
-          TextField(
-            controller: TextEditingController(text: _passwordItem?.decrypt()),
-            decoration: InputDecoration(
-              labelText: 'Password',
-            ),
-            onChanged: (String val) {
-              password = val;
-            },
-            onSubmitted: (String val) {
-              setState(() {
-                _passwordItem.encrypted = _passwordItem.encrypt(val);
-              });
-            },
-          ),
-          ButtonBar(
+      body: Builder(builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.only(left: 15, right: 15),
+          child: Column(
             children: <Widget>[
-              RaisedButton(
-                child: Text('Save'),
-                onPressed: () async {
-                  print(_passwordItem.toMap());
-                  if (_passwordItem.id == 0) {
-                    var res = _passwordItem.encrypt(password);
-                    await PasswordDetailService().addPassword(title, _passwordItem.salt, userName, res);
-                  } else {
-                    await PasswordDetailService().savePassword(_passwordItem.id, _passwordItem.toMap());
-                  }
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Salt'
+                ),
+                controller: _saltController,
+                enabled: false,
+              ),
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                    labelText: 'Position'
+                ),
+                onChanged: (String val) {
+                  title = val;
                 },
               ),
-              RaisedButton(
-                child: Text('Reset'),
-                onPressed: () {
-
+              TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                    labelText: 'User Name'
+                ),
+                onChanged: (String val) {
+                  userName = val;
                 },
+              ),
+              TextField(
+                controller: _decryptedController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                onChanged: (String val) {
+                  password = val;
+                },
+              ),
+              ButtonBar(
+                children: <Widget>[
+                  RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    child: Text('Save', style: TextStyle(color: Colors.white)),
+                    onPressed: () async {
+                      _passwordItem.userName = _usernameController.text;
+                      _passwordItem.title = _titleController.text;
+                      _passwordItem.encrypted = _passwordItem.encrypt(_decryptedController.text);
+                      if (_passwordItem.id == 0) {
+                        var res = _passwordItem.encrypt(_decryptedController.text);
+                        await PasswordDetailService().addPassword(_titleController.text, _passwordItem.salt, _usernameController.text, res);
+                        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Add Password successfully')));
+                      } else {
+                        await PasswordDetailService().savePassword(_passwordItem.id, _passwordItem.toMap());
+                        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Save Password successfully')));
+                      }
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                  ),
+                ],
               )
             ],
-          )
-        ],
-      ),
+          ),
+        );
+      })
     );
   }
 }

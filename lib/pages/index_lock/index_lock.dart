@@ -23,6 +23,9 @@ class _IndexLockPageState extends State<IndexLockPage> {
     return Scaffold(
       body: Builder(builder: (BuildContext context) {
         return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage('assets/index.png'), fit: BoxFit.fitHeight)
+          ),
           child: Flex(
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,6 +35,11 @@ class _IndexLockPageState extends State<IndexLockPage> {
                   child: Container(
                     width: 50,
                     child: TextField(
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      obscureText: true,
                       controller: _controller1,
                       focusNode: _node1,
                       keyboardType: TextInputType.number,
@@ -54,6 +62,11 @@ class _IndexLockPageState extends State<IndexLockPage> {
                   child: Container(
                     width: 50,
                     child: TextField(
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      obscureText: true,
                       controller: _controller2,
                       focusNode: _node2,
                       keyboardType: TextInputType.number,
@@ -76,6 +89,11 @@ class _IndexLockPageState extends State<IndexLockPage> {
                   child: Container(
                     width: 50,
                     child: TextField(
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      obscureText: true,
                       controller: _controller3,
                       focusNode: _node3,
                       keyboardType: TextInputType.number,
@@ -98,18 +116,21 @@ class _IndexLockPageState extends State<IndexLockPage> {
                   child: Container(
                     width: 50,
                     child: TextField(
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      obscureText: true,
                       controller: _controller4,
                       focusNode: _node4,
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       onChanged: (String val) async {
                         if (val.length == 1) {
-                          print('finish');
                           FocusScope.of(context).requestFocus(FocusNode());
                           // check password goes here
                           password = '${_controller1.text}${_controller2.text}${_controller3.text}${_controller4.text}';
                           bool isOk = await IndexLockService.validatePassword(password);
-                          print(isOk);
                           if (isOk) {
                             RootRoutes.router.navigateTo(context, '/password', replace: true);
                           } else {

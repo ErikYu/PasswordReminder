@@ -51,7 +51,6 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     // TODO: implement initState
     setState(() {
       _selectedIndex = widget.currentIndex;
-      print(_selectedIndex);
     });
     super.initState();
   }

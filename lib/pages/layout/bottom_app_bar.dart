@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './fab_bottom_app_bar.dart';
 import 'package:password_reminder/fluro_router.dart';
+import 'package:fluro/fluro.dart';
 
 class MyBottomAppBar extends StatelessWidget {
   MyBottomAppBar({this.currentIndex}) : assert(currentIndex != null);
@@ -14,10 +15,10 @@ class MyBottomAppBar extends StatelessWidget {
         if (i != currentIndex) {
           switch(i) {
             case 0:
-              RootRoutes.router.navigateTo(context, '/password', replace: true);
+              RootRoutes.router.navigateTo(context, '/password', replace: true,  transition: TransitionType.inFromLeft);
               break;
             case 1:
-              RootRoutes.router.navigateTo(context, '/setting', replace: true);
+              RootRoutes.router.navigateTo(context, '/setting', replace: true,  transition: TransitionType.inFromRight);
               break;
           }
         }
