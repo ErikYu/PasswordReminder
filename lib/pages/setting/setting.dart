@@ -25,13 +25,21 @@ class SettingPage extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_right),
             title: Text('导入/导出'),
             onTap: () {
-              print('go change password');
+              RootRoutes.router.navigateTo(context, '/setting/export_import');
             },
           ),
           ListTile(
             leading: Icon(Icons.update),
             trailing: Icon(Icons.keyboard_arrow_right),
             title: Text('检查更新'),
+            onTap: () {
+              print('go change password');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.person),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            title: Text('关于'),
             onTap: () {
               print('go change password');
             },
