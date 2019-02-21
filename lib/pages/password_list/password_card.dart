@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:password_reminder/models/password.dart';
-import 'package:password_reminder/fluro_router.dart';
 
 class PasswordCard extends StatefulWidget {
   static String defaultPass = '•••••••••';

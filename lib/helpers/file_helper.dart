@@ -53,9 +53,14 @@ class FileHelper {
     return await file.readAsString();
   }
 
-  saveFile(lst) async {
+  saveLstFile(lst) async {
     final File file = await localFile(await getFile());
     file.writeAsStringSync(jsonEncode(lst));
+  }
+
+  saveStringFile(String val) async {
+    final File file = await localFile(await getFile());
+    file.writeAsStringSync(val);
   }
 
   resetFile() async {

@@ -23,13 +23,13 @@ class PasswordDetailService {
       userName: userName,
       encrypted: encrypted
     ).toMap());
-    await FileHelper(MyFiles.pwd).saveFile(res);
+    await FileHelper(MyFiles.pwd).saveLstFile(res);
   }
 
   savePassword(int id, Map newData) async {
     List res = await FileHelper(MyFiles.pwd).readFileAsJson();
     var thisOne = res.firstWhere((i) => i['id'] == id);
     res[res.indexOf(thisOne)] = newData;
-    await FileHelper(MyFiles.pwd).saveFile(res);
+    await FileHelper(MyFiles.pwd).saveLstFile(res);
   }
 }

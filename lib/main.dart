@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pages/password_list/password_list.dart';
 import 'package:fluro/fluro.dart';
 import 'fluro_router.dart';
 import 'helpers/file_helper.dart';
-import 'pages/test_widget/demo_dismissible.dart';
-import 'pages/test_widget/demo_inkwell.dart';
 import 'pages/index_lock/index_lock.dart';
-import 'pages/setting/setting.dart';
+//import 'pages/setting/setting.dart';
 
 void main() {
   final router = new Router();
@@ -30,7 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   checkData() async {
     await FileHelper(MyFiles.pwd).initFile(seedContent: '[]');
-    await FileHelper(MyFiles.locker).initFile();
+    await FileHelper(MyFiles.locker).initFile(seedContent: '1234');
   }
 
   @override
@@ -49,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         // is not restarted.
         primarySwatch: Colors.deepPurple,
       ),
-      home: SettingPage(),
+      home: IndexLockPage(),
     );
   }
 }

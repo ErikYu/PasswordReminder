@@ -11,6 +11,6 @@ class PasswordListService {
   deleteChosenPassword(int id) async {
     List res = await FileHelper(MyFiles.pwd).readFileAsJson();
     res.removeWhere((i) => i['id'] == id);
-    await FileHelper(MyFiles.pwd).saveFile(res);
+    await FileHelper(MyFiles.pwd).saveLstFile(res);
   }
 }
