@@ -5,7 +5,7 @@ import '../pages/setting/setting.dart';
 import '../pages/lock_reset/lock_reset.dart';
 import '../pages/export_import/export_import.dart';
 import '../pages/index_lock/index_lock.dart';
-
+import '../pages/about/about.dart';
 
 class RootRoutes {
   static Router router;
@@ -15,6 +15,7 @@ class RootRoutes {
   static String setting = '/setting';
   static String lockReset = '/setting/lockreset';
   static String exportImport = '/setting/export_import';
+  static String about = '/setting/about';
 
   static void configureRoutes(Router router) {
     router.define(lock, handler: Handler(handlerFunc: (context, param) => IndexLockPage()));
@@ -23,6 +24,7 @@ class RootRoutes {
     router.define(setting, handler: Handler(handlerFunc: (context, param) => SettingPage()));
     router.define(lockReset, handler: Handler(handlerFunc: (context, param) => LockResetPage()));
     router.define(exportImport, handler: Handler(handlerFunc: (context, param) => ExportImport()));
+    router.define(about, handler: Handler(handlerFunc: (context, param) => AboutPage()));
     RootRoutes.router = router;
   }
 }

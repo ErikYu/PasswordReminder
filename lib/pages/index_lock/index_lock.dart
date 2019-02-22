@@ -27,7 +27,7 @@ class _IndexLockPageState extends State<IndexLockPage> {
       body: Builder(builder: (BuildContext context) {
         return Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/index.png'), fit: BoxFit.fitHeight)
+            image: DecorationImage(image: AssetImage('assets/index.png'), fit: BoxFit.fill)
           ),
           child: Flex(
             direction: Axis.horizontal,

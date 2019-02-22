@@ -42,6 +42,7 @@ class SettingPage extends StatelessWidget {
             title: Text('关于'),
             onTap: () {
               print('go change password');
+              RootRoutes.router.navigateTo(context, '/setting/about');
             },
           )
         ],
