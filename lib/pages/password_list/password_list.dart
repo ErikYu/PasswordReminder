@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vibrate/vibrate.dart';
 import './password_list_service.dart';
 import 'package:password_reminder/models/password.dart';
 import './password_card.dart';
 import '../layout/bottom_app_bar.dart';
-import 'package:password_reminder/fluro_router.dart';
-import 'package:password_reminder/store/main_store.dart';
+import 'package:password_reminder/router_module/root_router.dart';
+import 'package:password_reminder/router_module/auto_nav_helper.dart';
 
 class PasswordListPage extends StatefulWidget {
   _PasswordListPageState createState() => _PasswordListPageState();
@@ -19,11 +20,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
   @override
   initState(){
     super.initState();
-    $locked = MainStore().locked.stream.listen((bool locked) {
-      if (locked) {
-        RootRoutes.router.navigateTo(context, '/', replace: true);
-      }
-    });
+    $locked = AutoNavHelper.startListen(context);
   }
 
   @override
@@ -40,6 +37,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          Vibrate.feedback(FeedbackType.impact);
           await RootRoutes.router.navigateTo(context, '/password/0',);
           setState(() {
             page = 1;
@@ -87,6 +85,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
                   ),
                   child: GestureDetector(
                     onLongPress: () async {
+                      Vibrate.feedback(FeedbackType.success);
                       await RootRoutes.router.navigateTo(context, '/password/${passwords[i].id}');
                       setState(() {
                         page = 1;

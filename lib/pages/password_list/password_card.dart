@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibrate/vibrate.dart';
 import 'package:password_reminder/models/password.dart';
 
 class PasswordCard extends StatefulWidget {
@@ -48,6 +49,7 @@ class _PasswordCardState extends State<PasswordCard> {
               icon: showDecrypted ? Icon(Icons.lock, color: Colors.white) : Icon(Icons.remove_red_eye, color: Colors.white),
               onPressed: () {
                 setState(() {
+                  Vibrate.feedback(FeedbackType.impact);
                   if (showDecrypted) {
                     showDecrypted = false;
                     // 关闭

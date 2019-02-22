@@ -7,6 +7,4 @@ class MainStore {
   }
   static final MainStore _instance = MainStore.internal();
   factory MainStore() => _instance;
-
-  BehaviorSubject<bool> locked = BehaviorSubject<bool>(seedValue: false);
 }

@@ -1,10 +1,10 @@
 import 'package:fluro/fluro.dart';
-import 'pages/password_list/password_list.dart';
-import 'pages/password_detail/password_detail.dart';
-import 'pages/setting/setting.dart';
-import 'pages/lock_reset/lock_reset.dart';
-import 'pages/export_import/export_import.dart';
-import 'pages/index_lock/index_lock.dart';
+import '../pages/password_list/password_list.dart';
+import '../pages/password_detail/password_detail.dart';
+import '../pages/setting/setting.dart';
+import '../pages/lock_reset/lock_reset.dart';
+import '../pages/export_import/export_import.dart';
+import '../pages/index_lock/index_lock.dart';
 
 
 class RootRoutes {

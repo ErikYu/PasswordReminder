@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../layout/bottom_app_bar.dart';
-import 'package:password_reminder/fluro_router.dart';
+import 'package:password_reminder/router_module/root_router.dart';
 
 class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {

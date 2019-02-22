@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'fluro_router.dart';
+import 'package:password_reminder/router_module/root_router.dart';
 import 'helpers/file_helper.dart';
 import 'pages/index_lock/index_lock.dart';
 //import 'pages/setting/setting.dart';
@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
 import 'store/main_store.dart';
+import 'router_module/navigation_store.dart';
 
 void main() {
   final router = new Router();
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.inactive) {
       // 后台运行
-      MainStore().locked.add(true);
+      NavigationStore().locked.add(true);
     }
   }
 

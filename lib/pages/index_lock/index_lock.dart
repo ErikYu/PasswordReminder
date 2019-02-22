@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'index_lock_service.dart';
-import 'package:password_reminder/fluro_router.dart';
+import 'package:password_reminder/router_module/root_router.dart';
+import 'package:password_reminder/router_module/navigation_store.dart';
 import 'package:password_reminder/store/main_store.dart';
+
 
 class IndexLockPage extends StatefulWidget {
   @override
@@ -134,7 +136,7 @@ class _IndexLockPageState extends State<IndexLockPage> {
                           bool isOk = await IndexLockService.validatePassword(password);
                           if (isOk) {
                             RootRoutes.router.navigateTo(context, '/password', replace: true);
-                            MainStore().locked.add(false);
+                            NavigationStore().locked.add(false);
                           } else {
                             Scaffold.of(context)
                               ..removeCurrentSnackBar()

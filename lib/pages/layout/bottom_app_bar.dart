@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './fab_bottom_app_bar.dart';
-import 'package:password_reminder/fluro_router.dart';
+import 'package:password_reminder/router_module/root_router.dart';
 import 'package:fluro/fluro.dart';
 
 class MyBottomAppBar extends StatelessWidget {
