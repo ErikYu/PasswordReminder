@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import './sign_in_service.dart';
+import 'package:password_reminder/router_module/root_router.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -16,12 +17,14 @@ class _SignInPageState extends State<SignInPage> {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Sign In'),),
         body: Builder(builder: (BuildContext context) {
           return Container(
             decoration: BoxDecoration(
 //          image: DecorationImage(image: AssetImage('assets/earth.jpg'), fit: BoxFit.fitWidth)
             ),
             child: ListView(
+              padding: EdgeInsets.only(left: 20, right: 20),
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(top: 60, bottom: 20),
@@ -51,8 +54,15 @@ class _SignInPageState extends State<SignInPage> {
                       color: Theme.of(context).primaryColor,
                       child: Text('Log In', style: TextStyle(color: Colors.white)),
                       onPressed: () async {
-                        print('asdjkhasdkjahskdasd');
-                        var a = await SignInService(context).signIn(_loginController.text, _pwdController.text);
+                        // TODO: 取消注释
+                        Scaffold.of(context)
+                          ..removeCurrentSnackBar()
+                          ..showSnackBar(SnackBar(content: Text('开发中')));
+//                        bool loginSuccess = await SignInService(context).signIn(_loginController.text, _pwdController.text);
+//                        if (loginSuccess) {
+//                          await SignInService(context).checkIfACTValidate();
+//                          RootRoutes.router.navigateTo(context, '/setting', replace: true);
+//                        }
                       },
                     ),
                   ),
@@ -63,18 +73,22 @@ class _SignInPageState extends State<SignInPage> {
                     FlatButton(
                       child: Text('Forget password'),
                       onPressed: () {
-
+                        Scaffold.of(context)
+                          ..removeCurrentSnackBar()
+                          ..showSnackBar(SnackBar(content: Text('开发中')));
                       },
                     ),
                     FlatButton(
                       child: Text('Sign up'),
                       onPressed: () {
-
+                        Scaffold.of(context)
+                          ..removeCurrentSnackBar()
+                          ..showSnackBar(SnackBar(content: Text('开发中')));
                       },
                     )
                   ],
                 ),
-                Text('dvacode.tech',textAlign: TextAlign.center, style: TextStyle(),),
+                Text('dvacode.tech',textAlign: TextAlign.center, style: TextStyle(height: 4)),
               ],
             ),
           );

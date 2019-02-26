@@ -1,4 +1,5 @@
 import 'sign_in.dart';
+import 'package:password_reminder/api/api_map.dart';
 
 class ResponseMeta {
   int code;
@@ -21,12 +22,12 @@ class ResponseMeta {
 }
 
 
-class BaseResponse {
+class BaseResponse<T> {
   ResponseMeta meta;
-  Map data;
+  T content;
 
-  BaseResponse(this.meta, this.data);
-  factory BaseResponse.fromJson(Map data) {
-    return BaseResponse(ResponseMeta.fromJson(data['meta']), data['data']);
+  BaseResponse(this.meta, this.content);
+  factory BaseResponse.fromJson(Map data, url) {
+    return BaseResponse(ResponseMeta.fromJson(data['meta']), ApiMap().urlModelRel[url](data['content']));
   }
 }

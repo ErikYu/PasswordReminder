@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageKeys {
   static final String ACK = 'ACK';
+  static final String COOKIE = 'COOKIE';
 }
 
 class StorageHelper {

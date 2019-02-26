@@ -6,6 +6,7 @@ import '../pages/lock_reset/lock_reset.dart';
 import '../pages/export_import/export_import.dart';
 import '../pages/index_lock/index_lock.dart';
 import '../pages/about/about.dart';
+import '../pages/sign_in/sign_in.dart';
 
 class RootRoutes {
   static Router router;
@@ -16,6 +17,7 @@ class RootRoutes {
   static String lockReset = '/setting/lockreset';
   static String exportImport = '/setting/export_import';
   static String about = '/setting/about';
+  static String signIn = '/sign_in';
 
   static void configureRoutes(Router router) {
     router.define(lock, handler: Handler(handlerFunc: (context, param) => IndexLockPage()));
@@ -25,6 +27,7 @@ class RootRoutes {
     router.define(lockReset, handler: Handler(handlerFunc: (context, param) => LockResetPage()));
     router.define(exportImport, handler: Handler(handlerFunc: (context, param) => ExportImport()));
     router.define(about, handler: Handler(handlerFunc: (context, param) => AboutPage()));
+    router.define(signIn, handler: Handler(handlerFunc: (context, param) => SignInPage()));
     RootRoutes.router = router;
   }
 }

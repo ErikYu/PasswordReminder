@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         primarySwatch: Colors.deepPurple,
         cursorColor: Colors.deepPurple,
       ),
-      home: SignInPage(),
+      home: IndexLockPage(),
     );
   }
 }

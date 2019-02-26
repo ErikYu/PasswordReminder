@@ -44,6 +44,15 @@ class SettingPage extends StatelessWidget {
               print('go change password');
               RootRoutes.router.navigateTo(context, '/setting/about');
             },
+          ),
+          ListTile(
+            leading: Icon(Icons.cloud_upload),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            title: Text('上传配置'),
+            onTap: () {
+              print('go change password');
+              RootRoutes.router.navigateTo(context, '/sign_in');
+            },
           )
         ],
       ),

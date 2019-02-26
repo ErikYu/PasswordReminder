@@ -2,6 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:password_reminder/models/response.dart';
 import 'package:password_reminder/models/base_data.dart';
+import 'package:password_reminder/api/api_map.dart';
+import 'package:password_reminder/helpers/storage_helper.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:password_reminder/helpers/file_helper.dart';
+import 'dart:io';
 
 class HttpUtil {
   Dio _dio;                                   // dio实例
@@ -24,12 +30,19 @@ class HttpUtil {
     _context = context;
   }
 
+  static String _exactCookie(cookie) {
+    return cookie[0].split(";").map((x) => x.trim().split("=")).where((x) => x.length == 2).where((x) => x[0] == 'session').toList()[0][1];
+  }
+
   HttpUtil._internal() {
     if (_dio == null) {
       _dio = new Dio();
+      getApplicationDocumentsDirectory().then((Directory val) {
+        _dio.interceptors.add(CookieManager(PersistCookieJar(dir: val.path)));
+      });
     }
     _dio.interceptors.add(InterceptorsWrapper(
-        onRequest:(RequestOptions options){
+        onRequest:(RequestOptions options) {
           // Do something before request is sent
           return options; //continue
           // If you want to resolve the request with some custom data，
@@ -39,22 +52,21 @@ class HttpUtil {
         },
         onResponse:(Response response) {
           // Do something with response data
-          BaseResponse res = BaseResponse.fromJson(response.data);
-          if (res.meta.code != 2000) {
-//            _scaffoldKey.currentState
-//              ..removeCurrentSnackBar()
-//              ..showSnackBar(SnackBar(content: Text(res.meta.internalMsg)));
-            Scaffold.of(_context).showSnackBar(SnackBar(content: Text(res.meta.userMsg)));
+          StorageHelper().setStringByKey(StorageKeys.COOKIE, _exactCookie(response.headers['set-cookie']));
+          ResponseMeta res = ResponseMeta.fromJson(response.data['meta']);
+          if (res.code != 2000) {
+            Scaffold.of(_context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text(res.userMsg)));
           }
 
           return response; // continue
         },
         onError: (DioError e) {
           // Do something with response error
-          Scaffold.of(_context).showSnackBar(SnackBar(content: Text('连接失败, 请检查服务器设置')));
-//          _scaffoldKey.currentState
-//            ..removeCurrentSnackBar()
-//            ..showSnackBar(SnackBar(content: Text('连接失败, 请检查服务器设置')));
+          Scaffold.of(_context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(e.response.data)));
           return  e;//continue
         }
     ));
@@ -64,16 +76,22 @@ class HttpUtil {
 
   Future<Map<String, dynamic>> get(String path, {Map<String, dynamic> params}) async {
     Response<Map<String, dynamic>> response;
+    var ack = await StorageHelper().getByKey(StorageKeys.ACK);
     if (null != params) {
-      response = await _dio.get('$baseUrl$prefix$path', queryParameters: params);
+      response = await _dio.get('$baseUrl$prefix$path', queryParameters: params, options: Options(headers: {'act': ack}));
     } else {
-      response = await _dio.get('$baseUrl$prefix$path');
+      response = await _dio.get('$baseUrl$prefix$path', options: Options(headers: {'act': ack}));
     }
     return response.data;
   }
 
-  post(String path, {@required Map<String, dynamic> data}) async {
-    Response<Map<String, dynamic>> response = await _dio.post('$baseUrl$prefix$path', data: data);
-    return BaseResponse.fromJson(response.data);
+  Future<BaseResponse<T>> post<T>(String path, {@required Map<String, dynamic> data}) async {
+    try {
+      var ack = await StorageHelper().getByKey(StorageKeys.ACK);
+      Response<Map<String, dynamic>> response = await _dio.post('$baseUrl$prefix$path', data: data, options: Options(headers: {'act': ack}));
+      return BaseResponse.fromJson(response.data, path);
+    } catch (e) {
+      print('error: $e');
+    }
   }
 }
