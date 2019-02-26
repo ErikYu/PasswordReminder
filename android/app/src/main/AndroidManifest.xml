@@ -16,7 +16,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="LOCKER"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_locker">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
