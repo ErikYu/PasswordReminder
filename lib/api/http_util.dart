@@ -1,12 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:password_reminder/models/response.dart';
-import 'package:password_reminder/models/base_data.dart';
-import 'package:password_reminder/api/api_map.dart';
 import 'package:password_reminder/helpers/storage_helper.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:password_reminder/helpers/file_helper.dart';
 import 'dart:io';
 
 class HttpUtil {
@@ -14,7 +11,7 @@ class HttpUtil {
   String baseUrl = 'http://172.12.78.174:7777';                        // 前缀
   final String prefix = '';            // 固定
 
-  var _scaffoldKey;
+//  var _scaffoldKey;
 
   BuildContext _context;
 
@@ -22,9 +19,9 @@ class HttpUtil {
 
   factory HttpUtil() => _instance;
 
-  setKey(key) {
-    _scaffoldKey = key;
-  }
+//  setKey(key) {
+//    _scaffoldKey = key;
+//  }
 
   setContext(BuildContext context) {
     _context = context;
@@ -52,7 +49,7 @@ class HttpUtil {
         },
         onResponse:(Response response) {
           // Do something with response data
-          StorageHelper().setStringByKey(StorageKeys.COOKIE, _exactCookie(response.headers['set-cookie']));
+          StorageHelper().setStringByKey(StorageKeys.cookie, _exactCookie(response.headers['set-cookie']));
           ResponseMeta res = ResponseMeta.fromJson(response.data['meta']);
           if (res.code != 2000) {
             Scaffold.of(_context)
@@ -76,7 +73,7 @@ class HttpUtil {
 
   Future<Map<String, dynamic>> get(String path, {Map<String, dynamic> params}) async {
     Response<Map<String, dynamic>> response;
-    var ack = await StorageHelper().getByKey(StorageKeys.ACK);
+    var ack = await StorageHelper().getByKey(StorageKeys.act);
     if (null != params) {
       response = await _dio.get('$baseUrl$prefix$path', queryParameters: params, options: Options(headers: {'act': ack}));
     } else {
@@ -87,7 +84,7 @@ class HttpUtil {
 
   Future<BaseResponse<T>> post<T>(String path, {@required Map<String, dynamic> data}) async {
     try {
-      var ack = await StorageHelper().getByKey(StorageKeys.ACK);
+      var ack = await StorageHelper().getByKey(StorageKeys.act);
       Response<Map<String, dynamic>> response = await _dio.post('$baseUrl$prefix$path', data: data, options: Options(headers: {'act': ack}));
       return BaseResponse.fromJson(response.data, path);
     } catch (e) {

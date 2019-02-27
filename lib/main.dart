@@ -4,11 +4,9 @@ import 'package:password_reminder/router_module/root_router.dart';
 import 'helpers/file_helper.dart';
 import 'pages/index_lock/index_lock.dart';
 import 'pages/sign_in/sign_in.dart';
-//import 'pages/setting/setting.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
-import 'store/main_store.dart';
 import 'router_module/navigation_store.dart';
 
 void main() {
@@ -68,7 +66,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         primarySwatch: Colors.deepPurple,
         cursorColor: Colors.deepPurple,
       ),
-      home: IndexLockPage(),
+      home: SignInPage(),
     );
   }
 }

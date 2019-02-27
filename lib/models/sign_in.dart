@@ -1,6 +1,6 @@
 class SignInData {
-  String ACT;
-  SignInData(this.ACT);
+  String act;
+  SignInData(this.act);
   factory SignInData.fromJson(Map data) {
     return SignInData(data['ACT']);
   }

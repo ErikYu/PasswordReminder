@@ -16,9 +16,9 @@ class SignInService {
       'password': password,
     };
     BaseResponse<SignIn> res = await _http.post<SignIn>('/api/login', data: payload);
-    await StorageHelper().setStringByKey(StorageKeys.ACK, res?.content?.data?.ACT);
-    print(res?.content?.data?.ACT);
-    return res?.content?.data?.ACT != null;
+    await StorageHelper().setStringByKey(StorageKeys.act, res?.content?.data?.act);
+    print(res?.content?.data?.act);
+    return res?.content?.data?.act != null;
   }
 
   checkIfACTValidate() async {

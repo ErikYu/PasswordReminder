@@ -25,6 +25,7 @@ class FileHelper {
     try {
       final File file = await localFile(await getFile());
       String str = await file.readAsString();
+      print(str);
       return true;
     } catch (e) {
       return false;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'index_lock_service.dart';
 import 'package:password_reminder/router_module/root_router.dart';
 import 'package:password_reminder/router_module/navigation_store.dart';
-import 'package:password_reminder/store/main_store.dart';
 
 
 class IndexLockPage extends StatefulWidget {

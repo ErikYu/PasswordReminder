@@ -55,14 +55,14 @@ class _SignInPageState extends State<SignInPage> {
                       child: Text('Log In', style: TextStyle(color: Colors.white)),
                       onPressed: () async {
                         // TODO: 取消注释
-                        Scaffold.of(context)
-                          ..removeCurrentSnackBar()
-                          ..showSnackBar(SnackBar(content: Text('开发中')));
-//                        bool loginSuccess = await SignInService(context).signIn(_loginController.text, _pwdController.text);
-//                        if (loginSuccess) {
-//                          await SignInService(context).checkIfACTValidate();
-//                          RootRoutes.router.navigateTo(context, '/setting', replace: true);
-//                        }
+//                        Scaffold.of(context)
+//                          ..removeCurrentSnackBar()
+//                          ..showSnackBar(SnackBar(content: Text('开发中')));
+                        bool loginSuccess = await SignInService(context).signIn(_loginController.text, _pwdController.text);
+                        if (loginSuccess) {
+                          await SignInService(context).checkIfACTValidate();
+                          RootRoutes.router.navigateTo(context, '/setting', replace: true);
+                        }
                       },
                     ),
                   ),

@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'package:rxdart/rxdart.dart';
-
 class MainStore {
   MainStore.internal() {
     print('实例化 MainStore');

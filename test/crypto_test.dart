@@ -1,6 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:password_reminder/helpers/file_helper.dart';
-import 'package:password_reminder/pages/index_lock/index_lock_service.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 
