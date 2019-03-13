@@ -3,7 +3,7 @@ import 'package:fluro/fluro.dart';
 import 'package:password_reminder/router_module/root_router.dart';
 import 'helpers/file_helper.dart';
 import 'pages/index_lock/index_lock.dart';
-import 'pages/sign_in/sign_in.dart';
+//import 'pages/sign_in/sign_in.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         primarySwatch: Colors.deepPurple,
         cursorColor: Colors.deepPurple,
       ),
-      home: SignInPage(),
+      home: IndexLockPage(),
     );
   }
 }

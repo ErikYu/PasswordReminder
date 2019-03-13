@@ -18,7 +18,7 @@ dependencies:
   path_provider: 0.4.1
   fluro: ^1.4.0
   crypto: ^2.0.6
-  rxdart: ^0.20.0
+  rxdart: ^0.21.0
   vibrate: ^0.0.4
   flutter_svg: ^0.10.3
   dio: 2.0.0
